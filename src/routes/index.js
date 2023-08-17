@@ -1,13 +1,12 @@
-const express =  require('express');
+const express = require("express");
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
-  try {
-    res.status(200).send({ msg: "Rota GET" });
-  } catch (error) {
-    res.status(500).send(error.message);
-  }
-});
+// Controllers
+const getUser = require("../controllers/users/GetUser");
+const registerUser = require("../controllers/users/Registeruser");
 
-module.exports = router
+router.get("/", getUser);
+router.post("/auth/register", registerUser);
+
+module.exports = router;
