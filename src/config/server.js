@@ -1,10 +1,15 @@
-import express from 'express';
-import "dotenv/config";
+const express = require("express");
+const router = require("../routes/index");
+require("dotenv").config();
 
 const connectToDatabase = require("../database/connect");
 
 connectToDatabase();
 
-const port = 3000;
+const server = express();
 
-app.listen(port, () => console.log(`Rodando com Express na porta ${port}`));
+server.use(express.json());
+
+server.use(router);
+
+module.exports = server;
