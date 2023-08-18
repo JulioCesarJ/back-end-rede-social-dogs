@@ -1,9 +1,15 @@
-const getUser = async (req, res) => {
+const UserModel = require("../../models/User.model");
+
+const getUser =  async (req, res) => {
   try {
-    res.status(200).send({ msg: "Rota GET" });
+    const authHeader = req.headers["x-access-token"]
+
+    const user = await UserModel.findOne(authHeader, "-password");
+
+    res.status(200).json(user);
   } catch (error) {
-    res.status(500).send(error.message);
+    res.status(404).json({ msg: "Usuário não encontrado!" });
   }
-}
+};
 
 module.exports = getUser
