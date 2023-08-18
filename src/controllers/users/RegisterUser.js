@@ -3,9 +3,9 @@ const bcrypt = require("bcrypt");
 
 const Registeruser = async (req, res) => {
   try {
-    const { name, email, password, confirmpassword } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!name) {
+    if (!username) {
       return res.status(422).json({ msg: "O nome é obrigatório!" });
     }
     if (!email) {
@@ -13,14 +13,6 @@ const Registeruser = async (req, res) => {
     }
     if (!password) {
       return res.status(422).json({ msg: "A senha é obrigatória!" });
-    }
-    if (!confirmpassword) {
-      return res
-        .status(422)
-        .json({ msg: "A confirmação de senha é obrigatória!" });
-    }
-    if (password !== confirmpassword) {
-      return res.status(422).json({ msg: "As senhas não conferem!" });
     }
 
     // check if user exist
@@ -34,7 +26,7 @@ const Registeruser = async (req, res) => {
 
     // create user
     const user = new UserModel({
-      name,
+      username,
       email,
       password: passwordHash,
     });

@@ -2,12 +2,12 @@ const UserModel = require("../../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const Signin = async  (req, res) => {
+const authLogin = async  (req, res) => {
   const { username, password } = req.body;
 
   // validations
   if (!username) {
-    return res.status(422).json({ msg: "O email é obrigatório!" });
+    return res.status(422).json({ msg: "O nome de usuário é obrigatório!" });
   }
   if (!password) {
     return res.status(422).json({ msg: "A senha é obrigatória!" });
@@ -35,4 +35,4 @@ const Signin = async  (req, res) => {
   }
 }
 
-module.exports = Signin
+module.exports = authLogin
